@@ -1,0 +1,81 @@
+#include<iostream>
+using namespace std;
+int count=0; 
+int merge(int a[ ],int b,int c,int d)
+{
+   int i=b; 
+   int j=c+1; 
+   int k=b;
+   int temp[d+1];
+  while(i<=c&&j<=d)
+ {
+    if (a[i]<=a[j])
+    {
+     temp[k]=a[i];
+     i++;
+    }
+  else
+   {
+     temp[k]=a[j];
+     j++;
+   }
+     k++;
+     count++;
+  }
+  while(i<=c)
+   {
+     temp[k]=a[i];
+     i++;
+     k++;
+   }
+  while(j<=d)
+   {
+     temp[k]=a[j];
+     j++;
+     k++;
+   }
+  for(int p=b;p<=d;p++)
+   {
+     a[p]=temp[p];
+   }
+    return count;
+  }
+int mergesort(int a[ ],int b,int d)
+  {
+    int comp;
+    if(b<d)
+  {
+    int c=(b+d)/2;
+    mergesort(a,b,c);
+    mergesort(a,c+1,d);
+    comp=merge(a,b,c,d);
+  }
+    return comp;
+  }
+int main ()
+  {
+    int s;
+    cout<<"Enter the size of an array"<< endl;
+    cin>>s;
+    int arr[s];
+    cout<<"Enter the elements of array"<<endl;
+    for(int i=0;i<s;i++)
+     {
+       cin>>arr[i];
+     }
+    cout<<"Elements of array before sorting are"<<endl;
+    for(int i=0;i<s;i++)
+     {
+       cout<<arr[i]<<"  ";
+     }
+    cout<<endl;
+    int c=mergesort(arr,0,s-1);
+    cout<<"Elements of array after sorting are"<<endl;
+    for(int i=0;i<s;i++)
+     {
+      cout<<arr[i]<<"  " ;
+     }
+    cout<<endl;
+    cout<<"Number of comaprisions while sorting the given array"<<c<<endl;
+    return 0;
+ }
